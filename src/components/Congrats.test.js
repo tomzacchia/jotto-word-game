@@ -1,8 +1,3 @@
-import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-
-Enzyme.configure({ adapter: new Adapter() });
 import Congrats from './Congrats';
 import { findByTestAttribute, checkPropsError } from '../test/test-utils';
 
