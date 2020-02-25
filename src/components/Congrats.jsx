@@ -16,4 +16,8 @@ function Congrats({ isSuccessful }) {
   return <div data-test="component-congrats">{successMessageMarkup}</div>;
 }
 
+Congrats.propTypes = {
+  isSuccessful: PropTypes.bool.isRequired
+};
+
 export default Congrats;
