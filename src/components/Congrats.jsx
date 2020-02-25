@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // receive success value -> show congrats if true
 function Congrats({ isSuccessful }) {
