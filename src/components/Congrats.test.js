@@ -1,6 +1,30 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
-import EnzymeAdapter from 'enzyme-adapter-react-16';
-import Congrats from './Congrats';
+import Adapter from 'enzyme-adapter-react-16';
 
-Enzyme.configure({ adapter: new EnzymeAdapter() });
+Enzyme.configure({ adapter: new Adapter() });
+import Congrats from './Congrats';
+import { findByTestAttribute } from '../test/test-utils';
+
+// since props are key value pairs
+const setup = (props = {}) => shallow(<Congrats {...props} />);
+
+describe('<Congrats /> renders', () => {
+  it('renders without error', () => {
+    const wrapper = setup();
+    const component = findByTestAttribute(wrapper, 'component-congrats');
+    expect(component.length).toBe(1);
+  });
+
+  it('renders no text when `isSuccessful` props is false', () => {
+    const wrapper = setup({ isSuccessful: false });
+    const component = findByTestAttribute(wrapper, 'component-congrats');
+    expect(component.text()).toBe('');
+  });
+
+  it('renders non-empty congrats message when `isSuccessful` prop is true', () => {
+    const wrapper = setup({ isSuccessful: true });
+    const message = findByTestAttribute(wrapper, 'congrats-message');
+    expect(message.text().length).not.toBe(0);
+  });
+});
