@@ -38,4 +38,34 @@ describe('if there are no words guessed', () => {
   });
 });
 
-describe('if there are words guessed', () => {});
+describe('if there are words guessed', () => {
+  let wrapper;
+  const guessedWords = [
+    { guessedWord: 'train', letterMatchCount: 3 },
+    { guessedWord: 'agile', letterMatchCount: 1 },
+    { guessedWord: 'party', letterMatchCount: 5 }
+  ];
+
+  beforeEach(() => {
+    wrapper = setup({ guessedWords });
+  });
+
+  test('render guessed words section', () => {
+    // we could specify div but that would be an implementation detail
+    // it is better to simply test if the container is rendered
+    const guessedWordsContainer = findByTestAttribute(
+      wrapper,
+      'guessed-words-container'
+    );
+    expect(guessedWordsContainer.length).toBe(1);
+  });
+
+  test('renders correct number of guessed words', () => {
+    const guessedWordsNodes = findByTestAttribute(
+      wrapper,
+      'guessed-words-node'
+    );
+    const guessedWordsPropLength = guessedWords.length;
+    expect(guessedWordsNodes.length).toBe(guessedWordsPropLength);
+  });
+});
