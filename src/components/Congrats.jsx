@@ -13,7 +13,11 @@ function Congrats({ isSuccessful }) {
     );
   }
 
-  return <div data-test="component-congrats">{successMessageMarkup}</div>;
+  return (
+    <div className="alert alert-success" data-test="component-congrats">
+      {successMessageMarkup}
+    </div>
+  );
 }
 
 Congrats.propTypes = {
