@@ -1,5 +1,9 @@
 import { correctGuess, actionTypes } from './';
 
+/* 
+  Redux actions are simply functions that returns objects
+  therefore testing them is relatively straightforward
+*/
 describe('correctGuess', () => {
   test('returns an action with type `CORRECT_GUESS`', () => {
     const action = correctGuess();
