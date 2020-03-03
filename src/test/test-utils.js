@@ -1,4 +1,6 @@
 import { checkPropTypes } from 'prop-types';
+import rootReducer from '../reducers';
+import { createStore } from 'redux';
 
 // for shallow wrappers
 export const findByTestAttribute = (wrapper, value) => {
@@ -15,4 +17,8 @@ export const checkPropsError = (component, props) => {
   );
 
   expect(propError).toBeUndefined();
+};
+
+export const storeFatory = initialState => {
+  return createStore(rootReducer, initialState);
 };
