@@ -1,45 +1,39 @@
 import Input from './Input';
-import { storeFatory } from '../test/test-utils';
+import { storeFatory, findByTestAttribute } from '../test/test-utils';
 
-/* 
-  when we test connected components, an error is thrown due to the fact
-  that there is to context for our components. When testing components
-  we have to pass store as a prop to the connected component. Eventually
-  the component will have a context provided when render inside <App />
-*/
 const setup = (initialState = {}) => {
   const store = storeFatory(initialState);
   const wrapper = shallow(<Input store={store} />)
     .dive()
     .dive();
-  console.log(wrapper.debug());
-  /* 
-    const wrapper = shallow(<Input store={store} />);
-    console.log(wrapper.debug());
-
-    When we shallow render our component the output is as such:
-      <ContextProvider value={{...}}>
-        <Input store={{...}} dispatch={[Function: dispatch]} />
-      </ContextProvider>
-    
-      - Our component gets wrapped in a HOC, <ContextProvider />
-        which gives its child component access to the store and disptach
-      - When we shallow render non-connected components the component
-        itself is rendered, therefore for connected components
-        we need to render the children as well or use:
-        shallow(<Component />).div().div()
-  */
+  // console.log(wrapper.debug());
+  return wrapper;
 };
 
 setup();
 
 describe('<Input /> render', () => {
   describe('no words guessed', () => {
-    test('Render without error', () => {});
+    let wrapper;
 
-    test('renders input box', () => {});
+    beforeEach(() => {
+      const initialState = { success: false };
+      wrapper = setup(initialState);
+    });
+    test('Render without error', () => {
+      const component = findByTestAttribute(wrapper, 'component-input');
+      expect(component.length).toBe(1);
+    });
 
-    test('renders submit button', () => {});
+    test('renders input box', () => {
+      const inputBox = findByTestAttribute(wrapper, 'input-box');
+      expect(inputBox.length).toBe(1);
+    });
+
+    test('renders submit button', () => {
+      const submitButton = findByTestAttribute(wrapper, 'submit-button');
+      expect(submitButton.length).toBe(1);
+    });
   });
 
   describe('when the word has been guessed successfully', () => {
