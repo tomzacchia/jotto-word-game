@@ -1,8 +1,8 @@
 import Input from './Input';
-import { storeFatory, findByTestAttribute } from '../test/test-utils';
+import { storeFactory, findByTestAttribute } from '../test/test-utils';
 
 const setup = (initialState = {}) => {
-  const store = storeFatory(initialState);
+  const store = storeFactory(initialState);
   const wrapper = shallow(<Input store={store} />)
     .dive()
     .dive();
