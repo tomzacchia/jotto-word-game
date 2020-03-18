@@ -1,6 +1,7 @@
 import { checkPropTypes } from 'prop-types';
 import rootReducer from '../reducers';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import { middlewares } from '../configureStore';
 
 // for shallow wrappers
 export const findByTestAttribute = (wrapper, value) => {
@@ -20,5 +21,8 @@ export const checkPropsError = (component, props) => {
 };
 
 export const storeFatory = initialState => {
-  return createStore(rootReducer, initialState);
+  const createStoreWithMiddlewares = applyMiddleware(...middlewares)(
+    createStore
+  );
+  return createStoreWithMiddlewares(rootReducer, initialState);
 };
