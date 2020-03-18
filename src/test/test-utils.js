@@ -20,7 +20,7 @@ export const checkPropsError = (component, props) => {
   expect(propError).toBeUndefined();
 };
 
-export const storeFatory = initialState => {
+export const storeFactory = initialState => {
   const createStoreWithMiddlewares = applyMiddleware(...middlewares)(
     createStore
   );
