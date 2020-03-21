@@ -22,7 +22,7 @@ describe('guessWord action dispatcher', () => {
         success: false,
         guessedWords: [
           {
-            guessWord: unsuccessfulGuess,
+            guessedWord: unsuccessfulGuess,
             letterMatchCount: 3
           }
         ]
@@ -40,7 +40,7 @@ describe('guessWord action dispatcher', () => {
         success: true,
         guessedWords: [
           {
-            guessWord: secretWord,
+            guessedWord: secretWord,
             letterMatchCount: secretWord.length
           }
         ]
