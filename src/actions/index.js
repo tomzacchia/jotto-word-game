@@ -1,8 +1,10 @@
 import { getLetterMatchCount } from '../helpers';
+import axios from 'axios';
 
 export const actionTypes = {
   CORRECT_GUESS: 'CORRECT_GUESS',
-  GUESS_WORD: 'GUESS_WORD'
+  GUESS_WORD: 'GUESS_WORD',
+  SET_SECRET_WORD: 'SET_SECRET_WORD'
 };
 
 export const guessWord = guessedWord => {
@@ -23,5 +25,18 @@ export const guessWord = guessedWord => {
         type: actionTypes.CORRECT_GUESS
       });
     }
+  };
+};
+
+export const getSecretWord = () => {
+  return dispatch => {
+    // when we're using MOXIOS, the get req will never reach the address specified
+    return axios.get('http://localhost:3030').then(res => {
+      // res.data = 'party'
+      dispatch({
+        type: actionTypes.SET_SECRET_WORD,
+        payload: res.data
+      });
+    });
   };
 };
